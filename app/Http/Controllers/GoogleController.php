@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
-use JWTAuth;
 
 class GoogleController extends Controller
 {
@@ -19,31 +18,10 @@ class GoogleController extends Controller
 
         $user =  Socialite::driver('google')->stateless()->user();
 
-        $name           = $user->getName();
-        $avatar         = $user->getAvatar();
-        $email          = $user->getEmail();
+        $user_model = new User;
+        $google_user = $user_model->googleCallback($user);
 
+        return response()->json(['google_user' => $google_user ]);
 
-        $user = User::where([
-            'name'           => $name,
-            'email'          => $email,
-            'avatar'         => $avatar,
-        ])->first();
-
-
-        $user = User::firstOrCreate([
-            'name'           => $name,
-            'email'          => $email,
-            'avatar'         => $avatar,
-        ]);
-
-        $token = JWTAuth::fromUser($user);
-
-        return response()->json([
-            'access_token'   => $token,
-            'name'           => $name,
-            'email'          => $email,
-            'avatar'         => $avatar,
-        ]);
     }
 }
