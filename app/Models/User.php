@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Storage;
+use Laravolt\Avatar\Avatar;
+use Illuminate\Support\Str;
 use JWTAuth;
 
 class User extends Authenticatable implements JWTSubject
@@ -67,6 +70,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function googleCallback($user)
     {
+
         $name           = $user->getName();
         $avatar         = $user->getAvatar();
         $email          = $user->getEmail();
@@ -93,6 +97,25 @@ class User extends Authenticatable implements JWTSubject
             'email'          => $email,
             'avatar'         => $avatar,
         ];
+    }
+
+    public function setDefaultAvatar ($user, $request)
+    {
+        $image_name = Str::random(20);
+
+        $avatar = new Avatar;
+        $avatar->create($user->email)
+               ->setShape('square')
+               ->setDimension(150)
+               ->setFontSize(82)
+               ->setBackground('#0080ff')
+               ->setForeground('#ffffff')
+               ->save('storage/users_avatars/'.$image_name.'.png');
+        $image_url = Storage::disk('public')->url('users_avatars/'.$image_name.'.png');
+
+        $user->avatar = $image_url;
+
+        $user->save();
     }
 
 

@@ -19,7 +19,9 @@ class RegisterController extends Controller
         $user = User::create(
             $request->validated(),
         );
-        $user->save();
+        $user->setDefaultAvatar($user, $request);
+
+        return response()->json(['message' => $user]);
 
     }
 

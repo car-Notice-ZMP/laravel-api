@@ -26,6 +26,7 @@ class RegisterUserRequest extends FormRequest
             'name'     => 'required|string|between:2,100',
             'email'    => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|confirmed|min:6',
+            'avatar'   => 'mimes:jpeg,png'
 
             //
         ];
@@ -39,7 +40,8 @@ class RegisterUserRequest extends FormRequest
             'email.string'       => 'Wprowadzony email jest niepoprawny',
             'email.unique'       => 'Podany adres email jest zajęty',
             'password.min'       => 'Hasło ma miec 6 znaków',
-            'password.confirmed' => 'Wprowadzone hasła różnią się od siebie'
+            'password.confirmed' => 'Wprowadzone hasła różnią się od siebie',
+            'avatar.mimes'       => 'Avatar ma być w odpowiednim formacie'
         ];
     }
 }
