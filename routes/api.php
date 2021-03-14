@@ -6,6 +6,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\NoticeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +27,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'auth', 'middleware' => 'api'], function () {
     Route::post('register', [ RegisterController::class, 'register']);
-    Route::post('login', [ LoginController::class, 'login']);
-    Route::get('profile', [ ProfileController::class, 'profile']);
+    Route::post('login',    [ LoginController::class, 'login']);
+    Route::get('profile',   [ ProfileController::class, 'profile']);
 });
 
 Route::get('google',          [ GoogleController::class, 'redirectToGoogle']);
 Route::get('google/callback', [ GoogleController::class, 'handleGoogleCallback']);
+
+Route::post('notices/store',         [ NoticeController::class, 'store']);
+Route::delete('notices/delete/{id}', [ NoticeController::class, 'destroy']);
+Route::post('notices/update/{id}',   [ NoticeController::class, 'update']);
+
