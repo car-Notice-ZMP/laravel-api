@@ -20,14 +20,18 @@ class NoticeController extends Controller
 
     public function destroy ($id, Notice $notice)
     {
-        $notice->destroyNotice($id);
+        $user = auth()->user();
+
+        $notice->destroyNotice($id, $user);
 
         return response()->json(['message' => 'Udało się usunąć ogłoszenie']);
     }
 
     public function update ($id, NoticeRequest $request, Notice $notice)
     {
-        $notice->updateNotice($id, $request->all());
+        $user = auth()->user();
+
+        $notice->updateNotice($id, $request->all(), $user);
 
         return response()->json(['message' => 'Udało się zaktualizować ogłoszenie']);
     }

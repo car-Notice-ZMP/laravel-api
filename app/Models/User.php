@@ -69,7 +69,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function notices(){
 
-        return $this->hasMany(Norice::class);
+        return $this->hasMany(Notice::class);
     }
 
     public function googleCallback($user)

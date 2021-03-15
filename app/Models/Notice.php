@@ -9,7 +9,6 @@ class Notice extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'title',
         'content',
@@ -31,25 +30,30 @@ class Notice extends Model
     {
         $notice = new Notice;
 
-        $notice->user_id = $user->id;
+        $notice->user_id       = $user->id;
         $notice->notice_author = $user->name;
 
         $notice->fill($data);
 
         $notice->save();
-
     }
 
-    public function destroyNotice ($id)
+    public function destroyNotice ($id, User $user)
     {
-        $notice = Notice::find($id);
+        $notice = Notice::findOrFail($id);
+
+        checkAuthor($notice->user_id, $user->id);
+
         $notice->delete();
     }
 
-    public function updateNotice ($id, array $data)
+    public function updateNotice ($id, array $data, User $user)
     {
-        Notice::find($id)->update($data);
+        $notice = Notice::findOrFail($id);
 
+        checkAuthor($notice->user_id, $user->id);
+
+        $notice->update($data);
     }
 }
 
