@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-use Illuminate\Support\Facades\Storage;
-use Laravolt\Avatar\Avatar;
-use Illuminate\Support\Str;
+use App\Services\AvatarService;
 use JWTAuth;
 
 class User extends Authenticatable implements JWTSubject
@@ -105,19 +103,10 @@ class User extends Authenticatable implements JWTSubject
 
     public function setDefaultAvatar ($user)
     {
-        $image_name = Str::random(20);
 
-        $avatar = new Avatar;
-        $avatar->create($user->email)
-               ->setShape('circle')
-               ->setDimension(150)
-               ->setFontSize(82)
-               ->setBackground('#821f10')
-               ->setForeground('#ffffff')
-               ->save('storage/users_avatars/'.$image_name.'.png');
-        $image_url = Storage::disk('public')->url('users_avatars/'.$image_name.'.png');
+        $avatar = new AvatarService;
 
-        $user->avatar = $image_url;
+        $user->avatar = $avatar->generate($user);
 
         $user->save();
     }
