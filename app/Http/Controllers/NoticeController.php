@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\NoticeRequest;
 use App\Models\Notice;
 
-
 class NoticeController extends Controller
 {
     //
     public function store (NoticeRequest $request, Notice $notice)
     {
-        $user = auth()->user();
-        $notice->storeNotice($user, $request->all());
+        $user   = auth()->user();
+        $upload = $notice->image  = $request->file('image');
+
+        $notice->storeNotice($user, $request->all(),$upload);
 
         return response()->json( [ 'message' => 'Udało się dodać ogłoszenie'] );
 

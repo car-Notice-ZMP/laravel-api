@@ -27,7 +27,8 @@ class NoticeRequest extends FormRequest
         return [
             'title'   => 'required|string|between:5,20',
             'content' => 'required|string|between:5,200',
-            //'image'   => 'required|string'
+            'image'   => 'required|image:jpeg,png,jpg,gif,svg|max:2048'
+
             //
         ];
     }
@@ -41,7 +42,8 @@ class NoticeRequest extends FormRequest
             'content.string'   => 'Zawartość ogłoszenia nie może być liczbą',
             'content.required' => 'To pole jest wymagane',
             'content.between'  => 'Treść ogłoszenia musi mieścić się w przedziale 5-200 znaków',
-            //'image.required'  => 'Dodanie zdjęcia pojazdu jest obowiązkowe'
+            'image.required'   => 'Dodanie zdjęcia pojazdu jest obowiązkowe',
+            'image.image'      => 'Dodany plik musi być zdjęciem'
         ];
     }
 }
