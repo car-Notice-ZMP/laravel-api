@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\NoticeController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,4 +38,8 @@ Route::get('google/callback', [ GoogleController::class, 'handleGoogleCallback']
 Route::post('notices/store',         [ NoticeController::class, 'store']);
 Route::delete('notices/delete/{id}', [ NoticeController::class, 'destroy']);
 Route::post('notices/update/{id}',   [ NoticeController::class, 'update']);
+Route::get('notices/show/{id}',      [ NoticeController::class, 'show']);
+Route::get('notices/my_notices',     [ NoticeController::class, 'showMyNotices']);
 
+
+Route::post('comments/{id}/store',         [ CommentController::class, 'store']);

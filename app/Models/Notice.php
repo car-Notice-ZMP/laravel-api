@@ -22,15 +22,30 @@ class Notice extends Model
         'user_id'
     ];
 
-    public function user ()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function storeNotice (User $user, array $data, $upload)
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
+
+    public function showNotice($id)
+    {
+
+        $notice = Notice::with('comments')
+            ->where('id', $id)
+            ->get();
+
+        return $notice;
+    }
+
+    public function storeNotice(User $user, array $data, $upload)
     {
         $notice = new Notice;
-        $image =  new UploadService;
+        $image  = new UploadService;
 
         $path = $image->setImage('notices', $upload);
 
@@ -43,7 +58,7 @@ class Notice extends Model
         $notice->save();
     }
 
-    public function destroyNotice ($id, User $user)
+    public function destroyNotice($id, User $user)
     {
         $notice = Notice::findOrFail($id);
 
@@ -52,7 +67,7 @@ class Notice extends Model
         $notice->delete();
     }
 
-    public function updateNotice ($id, array $data, User $user)
+    public function updateNotice($id, array $data, User $user)
     {
         $notice = Notice::findOrFail($id);
 
@@ -61,4 +76,3 @@ class Notice extends Model
         $notice->update($data);
     }
 }
-
