@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Notice;
 
 class FavouriteController extends Controller
@@ -41,6 +39,16 @@ class FavouriteController extends Controller
         $user->unfavorite($notice);
 
         return response()->json(['message' => 'Usunięto z ulubionych']);
+
+    }
+
+    public function count ()
+    {
+        $user   = auth()->user();
+
+        $total = $user->favorites()->count(); 
+
+        return response()->json(['Ilość polubień' => $total]);
 
     }
 }

@@ -48,5 +48,6 @@ Route::post('comments/{id}/store',         [ CommentController::class, 'store'])
 
 Route::post('fav/{id}/store', [ FavouriteController::class, 'store']);
 Route::get('fav/get',         [ FavouriteController::class, 'show']);
+Route::get('fav/counter',         [ FavouriteController::class, 'count']);
 Route::post('fav/{id}/unf',   [ FavouriteController::class, 'unfavourite']);
 
