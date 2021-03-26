@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FavouriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +44,9 @@ Route::get('notices/my_notices',     [ NoticeController::class, 'showMyNotices']
 
 
 Route::post('comments/{id}/store',         [ CommentController::class, 'store']);
+
+
+Route::post('fav/{id}/store', [ FavouriteController::class, 'store']);
+Route::get('fav/get',         [ FavouriteController::class, 'show']);
+Route::post('fav/{id}/unf',   [ FavouriteController::class, 'unfavourite']);
+
