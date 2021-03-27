@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Services\UploadService;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
+use Spatie\ModelStatus\HasStatuses;
 
 class Notice extends Model
 {
-    use HasFactory, Favoriteable;
+    use HasFactory, Favoriteable, HasStatuses;
 
     protected $fillable = [
         'title',
@@ -36,7 +37,7 @@ class Notice extends Model
     public function showNotice($id)
     {
 
-        $notice = Notice::with('comments')
+        $notice = Notice::with('statuses', 'comments')
             ->where('id', $id)
             ->get();
 
@@ -54,9 +55,14 @@ class Notice extends Model
         $notice->notice_author = $user->name;
         $notice->image_url     = $path;
 
+
         $notice->fill($data);
 
         $notice->save();
+
+        $notice->setStatus('aktywny');
+
+        $notice->deleteStatus('aktywny');
     }
 
     public function destroyNotice($id, User $user)

@@ -19,6 +19,7 @@
         "laravolt/avatar": "^4.1",
         "overtrue/laravel-favorite": "^3.0",
         "ramsey/uuid": "^4.1",
+        "spatie/laravel-model-status": "^1.10",
         "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {

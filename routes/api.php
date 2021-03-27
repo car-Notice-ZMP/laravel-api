@@ -41,6 +41,7 @@ Route::delete('notices/delete/{id}', [ NoticeController::class, 'destroy']);
 Route::post('notices/update/{id}',   [ NoticeController::class, 'update']);
 Route::get('notices/show/{id}',      [ NoticeController::class, 'show']);
 Route::get('notices/my_notices',     [ NoticeController::class, 'showMyNotices']);
+Route::get('notices/status/{id}',    [ NoticeController::class, 'checkStatus']);
 
 
 Route::post('comments/{id}/store',         [ CommentController::class, 'store']);
@@ -48,6 +49,6 @@ Route::post('comments/{id}/store',         [ CommentController::class, 'store'])
 
 Route::post('fav/{id}/store', [ FavouriteController::class, 'store']);
 Route::get('fav/get',         [ FavouriteController::class, 'show']);
-Route::get('fav/counter',         [ FavouriteController::class, 'count']);
+Route::get('fav/counter',     [ FavouriteController::class, 'count']);
 Route::post('fav/{id}/unf',   [ FavouriteController::class, 'unfavourite']);
 

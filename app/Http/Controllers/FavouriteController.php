@@ -18,7 +18,6 @@ class FavouriteController extends Controller
 
         return response()->json(['message' => 'Dodano do ulubionych']);
 
-
     }
 
     public function show ()
@@ -46,7 +45,7 @@ class FavouriteController extends Controller
     {
         $user   = auth()->user();
 
-        $total = $user->favorites()->count(); 
+        $total = $user->favorites()->count();
 
         return response()->json(['Ilość polubień' => $total]);
 
