@@ -33,9 +33,10 @@ class LoginUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required'     => 'To pole jest wymagane',
-            'email.string'       => 'Wprowadzony email jest niepoprawny',
-            'password.min'       => 'Hasło ma miec 6 znaków',
+            'email.required' => 'To pole jest wymagane',
+            'email.email'    => 'Wprowadzony adres jest niepoprawny',
+            'email.string'   => 'Wprowadzony email jest niepoprawny',
+            'password.min'   => 'Hasło ma miec 6 znaków',
         ];
     }
 

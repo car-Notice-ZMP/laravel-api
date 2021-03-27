@@ -20,7 +20,7 @@ class NoticeController extends Controller
 
     public function showMyNotices()
     {
-        $user   = auth()->user();
+        $user      = auth()->user();
         $my_notice = $user->notices()->get();
 
         return response()->json(['my_all_notices' => $my_notice]);

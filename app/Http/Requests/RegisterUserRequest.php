@@ -39,6 +39,7 @@ class RegisterUserRequest extends FormRequest
             'email.required'     => 'To pole jest wymagane',
             'email.string'       => 'Wprowadzony email jest niepoprawny',
             'email.unique'       => 'Podany adres email jest zajęty',
+            'email.email'        => 'Wprowadzony adres jest niepoprawny',
             'password.min'       => 'Hasło ma miec 6 znaków',
             'password.confirmed' => 'Wprowadzone hasła różnią się od siebie',
             'avatar.mimes'       => 'Avatar ma być w odpowiednim formacie'
