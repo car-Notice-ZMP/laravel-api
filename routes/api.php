@@ -41,7 +41,7 @@ Route::delete('notices/delete/{id}', [ NoticeController::class, 'destroy']);
 Route::post('notices/update/{id}',   [ NoticeController::class, 'update']);
 Route::get('notices/show/{id}',      [ NoticeController::class, 'show']);
 Route::get('notices/my_notices',     [ NoticeController::class, 'showMyNotices']);
-Route::get('notices/status/{id}',    [ NoticeController::class, 'checkStatus']);
+Route::post('notices/status/{id}',   [ NoticeController::class, 'freshStatus']);
 
 
 Route::post('comments/{id}/store',         [ CommentController::class, 'store']);

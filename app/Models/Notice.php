@@ -81,4 +81,16 @@ class Notice extends Model
 
         $notice->update($data);
     }
+
+    public function freshNoticeStatus ($id, User $user)
+    {
+        $notice = Notice::findOrFail($id);
+
+        checkAuthor($notice->user_id, $user->id);
+
+        $notice->deleteStatus('nieaktywne');
+
+        $notice->setStatus('aktywne');
+
+    }
 }

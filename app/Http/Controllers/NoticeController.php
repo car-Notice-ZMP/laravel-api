@@ -54,16 +54,14 @@ class NoticeController extends Controller
         return response()->json(['message' => 'Udało się zaktualizować ogłoszenie']);
     }
 
-    public function checkStatus ($id)
+    public function freshStatus ($id, Notice $notice)
     {
 
-        $notice = Notice::findOrFail($id);
+        $user = auth()->user();
 
-        $statuses = $notice->statuses();
+        $notice->freshNoticeStatus($id, $user);
 
-        $status = $notice->status();
-
-        return response()->json(['message' => $status]);
+        return response()->json(['message' => 'Status ogłoszenia został zmieniony']);
 
     }
 }
