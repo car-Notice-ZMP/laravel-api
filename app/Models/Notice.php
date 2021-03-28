@@ -60,9 +60,8 @@ class Notice extends Model
 
         $notice->save();
 
-        $notice->setStatus('aktywny');
+        $notice->setStatus('aktywne');
 
-        $notice->deleteStatus('aktywny');
     }
 
     public function destroyNotice($id, User $user)
