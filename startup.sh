@@ -9,7 +9,7 @@ sed -i 's/DB_DATABASE=laravel/DB_DATABASE=laraapp_db/g' .env
 sed -i 's/DB_PASSWORD=nothing/DB_PASSWORD=wp/g' .env
 php artisan key:generate
 php artisan jwt:secret
-php artisan migrate:fresh
+php artisan migrate
 chmod -R 777 storage
 mkdir storage/app/public/notices
 mkdir storage/app/public/users_avatars
