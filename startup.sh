@@ -14,3 +14,6 @@ chmod -R 777 storage
 mkdir storage/app/public/notices
 mkdir storage/app/public/users_avatars
 php artisan storage:link
+service cron start
+apt-get update && apt-get install -y rsyslog
+service rsyslog start
