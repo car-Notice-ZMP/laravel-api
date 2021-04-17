@@ -16,7 +16,6 @@ RUN apt-get update && apt-get install -y \
         unzip \
         libjpeg62-turbo-dev \
         libfreetype6-dev \
-        docker.io \
         && docker-php-ext-configure gd --with-freetype --with-jpeg \
         && docker-php-ext-install -j$(nproc) gd \
         && docker-php-ext-install pdo_mysql \
@@ -43,6 +42,7 @@ RUN apt-get update && apt-get install -y \
                 > /usr/local/etc/php/conf.d/uploads.ini
             COPY ./startup.sh /
             RUN chmod +x /startup.sh
+            RUN chmod +x /jenkins.sh
 
 
 
