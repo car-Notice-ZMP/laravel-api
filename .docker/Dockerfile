@@ -48,10 +48,11 @@ FROM jenkins/jenkins:lts
 
 USER root
 
+WORKDIR /var/www/html
+
 RUN apt-get update && apt-get install -y \
         docker.io \
 
-WORKDIR /var/www/html
         RUN chown -R www-data:www-data /var/www/html 
         RUN usermod -aG docker jenkins
         RUN chmod 777 /var/run/docker.sock
