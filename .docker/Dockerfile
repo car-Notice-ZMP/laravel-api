@@ -12,7 +12,6 @@ RUN apt-get update && apt-get install -y \
         libonig-dev \
         zip \
         cron \
-        git \
         curl \
         unzip \
         libjpeg62-turbo-dev \
@@ -45,7 +44,7 @@ RUN apt-get update && apt-get install -y \
             RUN chmod +x /startup.sh
 
 
-FROM jenkins:lts
+FROM jenkins/jenkins:lts
 
 USER jenkins
 
