@@ -48,8 +48,6 @@ FROM jenkins/jenkins:lts
 
 USER root
 
-WORKDIR /var/www/html
-
 RUN apt-get update && apt-get install -y \
         docker.io \
 
