@@ -51,7 +51,7 @@ USER root
 WORKDIR /var/www/html
 
 RUN apt-get update && apt-get install -y \
-        docker.io \
+        docker.io 
 
         RUN chown -R www-data:www-data /var/www/html 
         RUN usermod -aG docker jenkins
