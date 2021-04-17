@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
         libonig-dev \
         zip \
         cron \
+        git \
         curl \
         unzip \
         libjpeg62-turbo-dev \
