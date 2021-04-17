@@ -25,7 +25,7 @@ services:
 
     image: jenkins/jenkins:lts
     privileged: true
-    user: root
+    user: jenkins
     ports:
       - 8081:8080
       - 50000:50000

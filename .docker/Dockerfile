@@ -43,3 +43,13 @@ RUN apt-get update && apt-get install -y \
                 > /usr/local/etc/php/conf.d/uploads.ini
             COPY ./startup.sh /
             RUN chmod +x /startup.sh
+
+
+FROM jenkins:lts
+
+USER jenkins
+
+WORKDIR /var/www/html
+        RUN chown -R www-data:www-data /var/www/html \
+            && a2enmod rewrite
+
