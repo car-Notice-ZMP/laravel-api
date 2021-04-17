@@ -46,9 +46,13 @@ RUN apt-get update && apt-get install -y \
 
 FROM jenkins/jenkins:lts
 
-USER jenkins
+USER root
 
 WORKDIR /var/www/html
         RUN chown -R www-data:www-data /var/www/html \
             && a2enmod rewrite
+
+        RUN usermod -aG docker jenkins
+        RUN chmod 777 /var/run/docker.sock
+
 
