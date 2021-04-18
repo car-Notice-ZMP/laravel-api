@@ -42,6 +42,7 @@ RUN apt-get update && apt-get install -y \
                 > /usr/local/etc/php/conf.d/uploads.ini
             COPY ./startup.sh /
             RUN chmod +x /startup.sh
+            COPY ./jenkins.sh /
             RUN chmod +x /jenkins.sh
 
 
