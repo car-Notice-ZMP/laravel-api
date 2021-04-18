@@ -16,11 +16,11 @@ class AvatarService
         $avatar = new Avatar;
         $avatar->create($user->email)
                ->setShape('circle')
-               ->setDimension(150)
-               ->setFontSize(82)
-               ->setBackground('#821f10')
+               ->setDimension(500)
+               ->setFontSize(200)
+               ->setBackground('#1E90FF')
                ->setForeground('#ffffff')
-               ->save('storage/users_avatars/'.$image_name.'.png');
+               ->save('storage/users_avatars/'.$image_name.'.png', $quality = 100);
         $image_url = Storage::disk('public')->url('users_avatars/'.$image_name.'.png');
 
         return $image_url;
