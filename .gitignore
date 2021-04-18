@@ -6,6 +6,8 @@ mysql/
 /mysql
 .env
 tags
+.docker/
+
 
 
 # Laravel 4 specific
