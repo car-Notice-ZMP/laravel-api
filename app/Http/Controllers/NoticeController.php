@@ -8,14 +8,14 @@ use App\Models\User;
 
 class NoticeController extends Controller
 {
-    //
 
     public function show($id, Notice $notice)
     {
 
         $notice_with_comment = $notice->showNotice($id);
 
-        return response()->json(['notice_with_comment' => $notice_with_comment]);
+        return response()->json(['notice_with_comment' => $notice_with_comment], 200, [],JSON_UNESCAPED_SLASHES);
+
     }
 
     public function showMyNotices()
@@ -23,7 +23,7 @@ class NoticeController extends Controller
         $user      = auth()->user();
         $my_notice = $user->notices()->get();
 
-        return response()->json(['my_all_notices' => $my_notice]);
+        return response()->json(['my_all_notices' => $my_notice], 200, [],JSON_UNESCAPED_SLASHES);
     }
 
     public function store(NoticeRequest $request, Notice $notice)

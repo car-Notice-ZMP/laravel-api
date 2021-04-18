@@ -21,7 +21,7 @@ class RegisterController extends Controller
         );
         $user->setDefaultAvatar($user);
 
-        return response()->json(['message' => $user]);
+        return response()->json(['message' => $user], 200, [],JSON_UNESCAPED_SLASHES);
 
     }
 
