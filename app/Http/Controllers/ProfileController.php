@@ -9,7 +9,7 @@ class ProfileController extends Controller
     //
     public function profile()
     {
-        return response()->json($this->guard()->user());
+        return response()->json(['message' => $this->guard()->user()], 200, [],JSON_UNESCAPED_SLASHES);
     }
 
     public function guard()
