@@ -9,6 +9,14 @@ use App\Models\User;
 class NoticeController extends Controller
 {
 
+    public function index()
+    {
+        $notices = Notice::all();
+
+        return response()->json(['All notices' => $notices], 200, [],JSON_UNESCAPED_SLASHES);
+         
+    }
+
     public function show($id, Notice $notice)
     {
 

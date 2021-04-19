@@ -40,6 +40,7 @@ Route::post('notices/store',         [ NoticeController::class, 'store']);
 Route::delete('notices/delete/{id}', [ NoticeController::class, 'destroy']);
 Route::post('notices/update/{id}',   [ NoticeController::class, 'update']);
 Route::get('notices/show/{id}',      [ NoticeController::class, 'show']);
+Route::get('notices/all',            [ NoticeController::class, 'index']);
 Route::get('notices/my_notices',     [ NoticeController::class, 'showMyNotices']);
 Route::post('notices/status/{id}',   [ NoticeController::class, 'freshStatus']);
 
