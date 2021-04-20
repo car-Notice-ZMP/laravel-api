@@ -23,7 +23,9 @@ class Notice extends Model
     ];
 
     protected $hidden = [
-        'user_id'
+        'user_id',
+        'image',
+        'image_name',
     ];
 
     public function user()
