@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NoticeRequest;
+use Illuminate\Http\Request;
 use App\Models\Notice;
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 
 class NoticeController extends Controller
@@ -53,13 +55,15 @@ class NoticeController extends Controller
         return response()->json(['message' => 'Udało się usunąć ogłoszenie']);
     }
 
-    public function update($id, NoticeRequest $request, Notice $notice)
+    public function update($id, Request $request, Notice $notice)
     {
+    
         $user = auth()->user();
+        $upload = $notice->image  = $request->file('image');
 
-        $notice->updateNotice($id, $request->all(), $user);
+        $notice->updateNotice($id, $request->all(), $user, $upload);
 
-        return response()->json(['message' => 'Udało się zaktualizować ogłoszenie']);
+        //return response()->json(['message' => 'Udało się zaktualizować ogłoszenie']);
     }
 
     public function freshStatus ($id, Notice $notice)

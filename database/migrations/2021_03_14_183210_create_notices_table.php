@@ -20,6 +20,7 @@ class CreateNoticesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('notice_author')->nullable();
             $table->string('image')->nullable();
+            $table->string('image_name')->nullable();
             $table->string('image_url')->nullable();
             $table->timestamps();
 

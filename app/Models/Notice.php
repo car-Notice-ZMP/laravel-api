@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Services\UploadService;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
 use Spatie\ModelStatus\HasStatuses;
+use Illuminate\Support\Facades\Storage;
+
 
 class Notice extends Model
 {
@@ -49,11 +51,12 @@ class Notice extends Model
         $notice = new Notice;
         $image  = new UploadService;
 
-        $path = $image->setImage('notices', $upload);
+        $image->setImage($upload);
 
         $notice->user_id       = $user->id;
         $notice->notice_author = $user->name;
-        $notice->image_url     = $path;
+        $notice->image_url     = $image->getImageUrl();
+        $notice->image_name    = $image->getFileName();
 
 
         $notice->fill($data);
@@ -73,13 +76,31 @@ class Notice extends Model
         $notice->delete();
     }
 
-    public function updateNotice($id, array $data, User $user)
+    public function updateNotice($id, array $data, User $user, $upload)
     {
         $notice = Notice::findOrFail($id);
+        $image  = new UploadService;
 
-        checkAuthor($notice->user_id, $user->id);
+        if($upload)
+        {
 
-        $notice->update($data);
+            $image->setImage($upload);
+
+            checkAuthor($notice->user_id, $user->id);
+
+            Storage::disk('notices')->delete($notice->image_name);
+
+            $notice->image_url     = $image->getImageUrl();
+            $notice->image_name    = $image->getFileName();
+
+            $notice->update($data);
+
+        }else {
+
+            $notice->update($data);
+
+        }
+
     }
 
     public function freshNoticeStatus ($id, User $user)
