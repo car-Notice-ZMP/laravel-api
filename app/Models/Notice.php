@@ -19,6 +19,7 @@ class Notice extends Model
         'content',
         'user_id',
         'notice_author',
+        'author_avatar',
         'image',
     ];
 
@@ -57,6 +58,7 @@ class Notice extends Model
 
         $notice->user_id       = $user->id;
         $notice->notice_author = $user->name;
+        $notice->author_avatar = $user->avatar;
         $notice->image_url     = $image->getImageUrl();
         $notice->image_name    = $image->getFileName();
 

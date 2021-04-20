@@ -13,6 +13,7 @@ class Comment extends Model
         'content',
         'user_id',
         'comment_author',
+        'author_avatar',
 
     ];
 
@@ -30,6 +31,7 @@ class Comment extends Model
         $comment = new Comment;
 
         $comment->comment_author = $user->name;
+        $comment->author_avatar  = $user->avatar;
         $comment->notice_id = $id;
 
         $comment->fill($data);

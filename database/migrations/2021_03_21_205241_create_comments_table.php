@@ -17,6 +17,7 @@ class CreateCommentsTable extends Migration
             $table->id();
             $table->text('content');
             $table->string('comment_author');
+            $table->string('author_avatar');
             $table->unsignedBigInteger('notice_id');
 
             $table->timestamps();

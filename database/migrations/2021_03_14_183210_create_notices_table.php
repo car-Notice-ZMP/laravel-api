@@ -19,6 +19,7 @@ class CreateNoticesTable extends Migration
             $table->text('content');
             $table->unsignedBigInteger('user_id');
             $table->string('notice_author')->nullable();
+            $table->string('author_avatar')->nullable();
             $table->string('image')->nullable();
             $table->string('image_name')->nullable();
             $table->string('image_url')->nullable();
