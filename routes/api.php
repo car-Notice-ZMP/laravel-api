@@ -9,6 +9,7 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavouriteController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,7 @@ Route::get('notices/show/{id}',      [ NoticeController::class, 'show']);
 Route::get('notices/all',            [ NoticeController::class, 'index']);
 Route::get('notices/my_notices',     [ NoticeController::class, 'showMyNotices']);
 Route::post('notices/status/{id}',   [ NoticeController::class, 'freshStatus']);
+Route::post('notices/search',        [ SearchController::class, 'search']);
 
 
 Route::post('comments/{id}/store',         [ CommentController::class, 'store']);

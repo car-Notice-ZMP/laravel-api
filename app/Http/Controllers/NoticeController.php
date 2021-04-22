@@ -16,7 +16,7 @@ class NoticeController extends Controller
         $notices = Notice::all();
 
         return response()->json(['All notices' => $notices], 200, [],JSON_UNESCAPED_SLASHES);
-         
+
     }
 
     public function show($id, Notice $notice)
@@ -31,6 +31,7 @@ class NoticeController extends Controller
     public function showMyNotices()
     {
         $user      = auth()->user();
+
         $my_notice = $user->notices()->get();
 
         return response()->json(['my_all_notices' => $my_notice], 200, [],JSON_UNESCAPED_SLASHES);
@@ -39,6 +40,7 @@ class NoticeController extends Controller
     public function store(NoticeRequest $request, Notice $notice)
     {
         $user   = auth()->user();
+
         $upload = $notice->image  = $request->file('image');
 
         $notice->storeNotice($user, $request->all(), $upload);
@@ -57,13 +59,14 @@ class NoticeController extends Controller
 
     public function update($id, Request $request, Notice $notice)
     {
-    
+
         $user = auth()->user();
+
         $upload = $notice->image  = $request->file('image');
 
         $notice->updateNotice($id, $request->all(), $user, $upload);
 
-        //return response()->json(['message' => 'Udało się zaktualizować ogłoszenie']);
+        return response()->json(['message' => 'Udało się zaktualizować ogłoszenie']);
     }
 
     public function freshStatus ($id, Notice $notice)

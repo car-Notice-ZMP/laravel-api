@@ -8,9 +8,13 @@ use App\Services\UploadService;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
 use Spatie\ModelStatus\HasStatuses;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
+use Spatie\Searchable\Search;
 
 
-class Notice extends Model
+
+class Notice extends Model implements Searchable
 {
     use HasFactory, Favoriteable, HasStatuses;
 
@@ -37,6 +41,14 @@ class Notice extends Model
     public function comments()
     {
         return $this->hasMany('App\Models\Comment');
+    }
+
+    public function getSearchResult(): SearchResult
+    {
+        return new \Spatie\Searchable\SearchResult(
+            $this,
+            $this->title,
+        );
     }
 
     public function showNotice($id)
@@ -116,6 +128,17 @@ class Notice extends Model
         $notice->deleteStatus('nieaktywne');
 
         $notice->setStatus('aktywne');
+
+    }
+
+    public function performSearch ($request)
+    {
+        $searchResults = (new Search())
+            ->registerModel(Notice::class, ['title', 'content'])
+            ->perform($request->get('search'));
+
+        return $searchResults;
+
 
     }
 }
