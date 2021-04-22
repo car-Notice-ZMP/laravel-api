@@ -16,10 +16,18 @@ class CreateNoticesTable extends Migration
         Schema::create('notices', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('content');
+            $table->text('message');
             $table->unsignedBigInteger('user_id');
             $table->string('notice_author')->nullable();
+            $table->string('notice_author_email')->nullable();
             $table->string('author_avatar')->nullable();
+            $table->string('mark')->nullable();
+            $table->string('model')->nullable();
+            $table->string('color')->nullable();
+            $table->string('year')->nullable();
+            $table->double('mileage')->nullable();
+            $table->double('price')->nullable();
+            $table->string('body')->nullable();
             $table->string('image')->nullable();
             $table->string('image_name')->nullable();
             $table->string('image_url')->nullable();

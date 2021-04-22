@@ -20,10 +20,18 @@ class Notice extends Model implements Searchable
 
     protected $fillable = [
         'title',
-        'content',
+        'message',
+        'notice_author_email',
         'user_id',
         'notice_author',
         'author_avatar',
+        'mark',
+        'model',
+        'color',
+        'year',
+        'mileage',
+        'price',
+        'body',
         'image',
     ];
 
@@ -68,11 +76,12 @@ class Notice extends Model implements Searchable
 
         $image->setImage($upload);
 
-        $notice->user_id       = $user->id;
-        $notice->notice_author = $user->name;
-        $notice->author_avatar = $user->avatar;
-        $notice->image_url     = $image->getImageUrl();
-        $notice->image_name    = $image->getFileName();
+        $notice->user_id             = $user->id;
+        $notice->notice_author       = $user->name;
+        $notice->notice_author_email = $user->email;
+        $notice->author_avatar       = $user->avatar;
+        $notice->image_url           = $image->getImageUrl();
+        $notice->image_name          = $image->getFileName();
 
 
         $notice->fill($data);
@@ -134,11 +143,19 @@ class Notice extends Model implements Searchable
     public function performSearch ($request)
     {
         $searchResults = (new Search())
-            ->registerModel(Notice::class, ['title', 'content'])
+            ->registerModel(Notice::class, ['title', 'message', 'mark', 'model', 'color', 'body', 'mileage', 'price', 'year'])
             ->perform($request->get('search'));
 
         return $searchResults;
 
+    }
 
+    public function performSearchInRange ($request)
+    {
+        $result = Notice::select('*')
+            ->WhereBetween($request->field, [$request->min, $request->max])
+            ->get();
+
+        return $result;
     }
 }

@@ -45,6 +45,7 @@ Route::get('notices/all',            [ NoticeController::class, 'index']);
 Route::get('notices/my_notices',     [ NoticeController::class, 'showMyNotices']);
 Route::post('notices/status/{id}',   [ NoticeController::class, 'freshStatus']);
 Route::post('notices/search',        [ SearchController::class, 'search']);
+Route::post('notices/search/between',        [ SearchController::class, 'searchBetween']);
 
 
 Route::post('comments/{id}/store',         [ CommentController::class, 'store']);
