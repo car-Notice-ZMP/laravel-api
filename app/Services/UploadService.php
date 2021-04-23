@@ -3,8 +3,6 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-
 
 class UploadService
 {
@@ -13,16 +11,12 @@ class UploadService
 
     public function setImage ($upload)
     {
-        $file_name = $upload->hashName();
-
+        $file_name           = $upload->hashName();
         $image_uploaded_path = $upload->storeAs('notices', $file_name, 'public');
-
-        $image_url  = Storage::disk('public')->url($image_uploaded_path);
+        $image_url           = Storage::disk('public')->url($image_uploaded_path);
 
         $this->image_url = $image_url;
         $this->file_name = $file_name;
-
-
     }
 
     public function getImageUrl()
@@ -34,7 +28,6 @@ class UploadService
     {
         return $this->file_name;
     }
-
 }
 
 

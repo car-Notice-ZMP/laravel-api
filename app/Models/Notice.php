@@ -12,8 +12,6 @@ use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 use Spatie\Searchable\Search;
 
-
-
 class Notice extends Model implements Searchable
 {
     use HasFactory, Favoriteable, HasStatuses;
@@ -83,7 +81,6 @@ class Notice extends Model implements Searchable
         $notice->image_url           = $image->getImageUrl();
         $notice->image_name          = $image->getFileName();
 
-
         $notice->fill($data);
 
         $notice->save();
@@ -108,7 +105,6 @@ class Notice extends Model implements Searchable
 
         if($upload)
         {
-
             $image->setImage($upload);
 
             checkAuthor($notice->user_id, $user->id);
@@ -121,11 +117,8 @@ class Notice extends Model implements Searchable
             $notice->update($data);
 
         }else {
-
             $notice->update($data);
-
         }
-
     }
 
     public function freshNoticeStatus ($id, User $user)
@@ -137,17 +130,25 @@ class Notice extends Model implements Searchable
         $notice->deleteStatus('nieaktywne');
 
         $notice->setStatus('aktywne');
-
     }
 
     public function performSearch ($request)
     {
         $searchResults = (new Search())
-            ->registerModel(Notice::class, ['title', 'message', 'mark', 'model', 'color', 'body', 'mileage', 'price', 'year'])
+            ->registerModel(Notice::class, [
+                'title',
+                'message',
+                'mark',
+                'model',
+                'color',
+                'body',
+                'mileage',
+                'price',
+                'year'
+            ])
             ->perform($request->get('search'));
 
         return $searchResults;
-
     }
 
     public function performSearchInRange ($request)

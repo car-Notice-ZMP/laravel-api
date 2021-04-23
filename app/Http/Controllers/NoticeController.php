@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\NoticeRequest;
 use Illuminate\Http\Request;
 use App\Models\Notice;
-use Illuminate\Support\Facades\Storage;
-use App\Models\User;
 
 class NoticeController extends Controller
 {
@@ -16,22 +14,18 @@ class NoticeController extends Controller
         $notices = Notice::all();
 
         return response()->json(['All notices' => $notices], 200, [],JSON_UNESCAPED_SLASHES);
-
     }
 
     public function show($id, Notice $notice)
     {
-
         $notice_with_comment = $notice->showNotice($id);
 
         return response()->json(['notice_with_comment' => $notice_with_comment], 200, [],JSON_UNESCAPED_SLASHES);
-
     }
 
     public function showMyNotices()
     {
         $user      = auth()->user();
-
         $my_notice = $user->notices()->get();
 
         return response()->json(['my_all_notices' => $my_notice], 200, [],JSON_UNESCAPED_SLASHES);
@@ -40,7 +34,6 @@ class NoticeController extends Controller
     public function store(NoticeRequest $request, Notice $notice)
     {
         $user   = auth()->user();
-
         $upload = $notice->image  = $request->file('image');
 
         $notice->storeNotice($user, $request->all(), $upload);
@@ -61,7 +54,6 @@ class NoticeController extends Controller
     {
 
         $user = auth()->user();
-
         $upload = $notice->image  = $request->file('image');
 
         $notice->updateNotice($id, $request->all(), $user, $upload);
