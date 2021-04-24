@@ -24,7 +24,7 @@ class CreateNoticesTable extends Migration
             $table->string('mark')->nullable();
             $table->string('model')->nullable();
             $table->string('color')->nullable();
-            $table->string('year')->nullable();
+            $table->double('year')->nullable();
             $table->double('mileage')->nullable();
             $table->double('price')->nullable();
             $table->string('body')->nullable();

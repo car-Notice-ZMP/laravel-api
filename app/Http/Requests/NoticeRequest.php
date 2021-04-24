@@ -26,14 +26,14 @@ class NoticeRequest extends FormRequest
         return [
             'title'   => 'required|string|between:5,20',
             'message' => 'required|string|between:5,200',
-            'mark'    => 'required|string|between:5,20',
-            'model'   => 'required|string|between:5,20',
+            'mark'    => 'required|string|between:2,20',
+            'model'   => 'required|string|between:2,20',
             'color'   => 'required|string|between:5,20',
             'year'    => 'between:4,4',
             'body'    => 'required|string|between:5,15',
             'mileage' => 'string',
             'price'   => 'string',
-            'image'   => 'required|image:jpeg,png,jpg,gif,svg|max:2048'
+            'image'   => 'required|image:jpeg,png,jpg,gif,svg|max:4048'
 
             //
         ];
