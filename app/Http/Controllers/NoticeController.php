@@ -10,7 +10,7 @@ class NoticeController extends Controller
 {
     public function index()
     {
-        $notices = Notice::all();
+        $notices = Notice::with('statuses')->get();
 
         return response()->json(['All notices' => $notices], 200, [],JSON_UNESCAPED_SLASHES);
     }
@@ -25,7 +25,7 @@ class NoticeController extends Controller
     public function showMyNotices()
     {
         $user      = auth()->user();
-        $my_notice = $user->notices()->get();
+        $my_notice = $user->notices()->with('statuses')->get();
 
         return response()->json(['my_all_notices' => $my_notice], 200, [],JSON_UNESCAPED_SLASHES);
     }
