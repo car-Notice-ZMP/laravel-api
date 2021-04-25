@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SearchNoticeRequest;
 use App\Models\Notice;
-use Illuminate\Http\Request;
 
 class SearchController extends Controller
 
@@ -16,7 +15,7 @@ class SearchController extends Controller
         return response()->json(['Result' => $searchResults], 200, [],JSON_UNESCAPED_SLASHES);
     }
 
-    public function searchBetween (Notice $notice, Request $request)
+    public function searchBetween (Notice $notice, SearchNoticeRequest $request)
     {
         $searchResults = $notice->performSearchInRange($request);
 

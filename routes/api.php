@@ -29,30 +29,32 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::group(['prefix' => 'auth', 'middleware' => 'api'], function () {
-    Route::post('register', [ RegisterController::class, 'register']);
-    Route::post('login',    [ LoginController::class, 'login']);
-    Route::get('profile',   [ ProfileController::class, 'profile']);
+    Route::post('register',           [ RegisterController::class, 'register']);
+    Route::post('login',              [ LoginController::class, 'login']);
+    Route::get('profile',             [ ProfileController::class, 'profile']);
 });
 
-Route::get('google',          [ GoogleController::class, 'redirectToGoogle']);
-Route::get('google/callback', [ GoogleController::class, 'handleGoogleCallback']);
+Route::get('google',                  [ GoogleController::class, 'redirectToGoogle']);
+Route::get('google/callback',         [ GoogleController::class, 'handleGoogleCallback']);
 
-Route::post('notices/store',         [ NoticeController::class, 'store']);
-Route::delete('notices/delete/{id}', [ NoticeController::class, 'destroy']);
-Route::post('notices/update/{id}',   [ NoticeController::class, 'update']);
-Route::get('notices/show/{id}',      [ NoticeController::class, 'show']);
-Route::get('notices/all',            [ NoticeController::class, 'index']);
-Route::get('notices/my_notices',     [ NoticeController::class, 'showMyNotices']);
-Route::post('notices/status/{id}',   [ NoticeController::class, 'freshStatus']);
-Route::post('notices/search',        [ SearchController::class, 'search']);
-Route::post('notices/search/between',        [ SearchController::class, 'searchBetween']);
+Route::middleware([ 'jwt.auth'])->group(function () {
 
+    Route::post('notices/store',          [ NoticeController::class, 'store']);
+    Route::delete('notices/delete/{id}',  [ NoticeController::class, 'destroy']);
+    Route::post('notices/update/{id}',    [ NoticeController::class, 'update']);
+    Route::get('notices/show/{id}',       [ NoticeController::class, 'show']);
+    Route::get('notices/my_notices',      [ NoticeController::class, 'showMyNotices']);
+    Route::post('notices/status/{id}',    [ NoticeController::class, 'freshStatus']);
 
-Route::post('comments/{id}/store',         [ CommentController::class, 'store']);
+    Route::post('comments/{id}/store',    [ CommentController::class, 'store']);
 
+    Route::post('fav/{id}/store',         [ FavouriteController::class, 'store']);
+    Route::get('fav/get',                 [ FavouriteController::class, 'show']);
+    Route::get('fav/counter',             [ FavouriteController::class, 'count']);
+    Route::post('fav/{id}/unf',           [ FavouriteController::class, 'unfavourite']);
 
-Route::post('fav/{id}/store', [ FavouriteController::class, 'store']);
-Route::get('fav/get',         [ FavouriteController::class, 'show']);
-Route::get('fav/counter',     [ FavouriteController::class, 'count']);
-Route::post('fav/{id}/unf',   [ FavouriteController::class, 'unfavourite']);
+});
 
+Route::get('notices/all',             [ NoticeController::class, 'index']);
+Route::post('notices/search',         [ SearchController::class, 'search']);
+Route::post('notices/search/between', [ SearchController::class, 'searchBetween']);

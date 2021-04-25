@@ -8,7 +8,6 @@ use App\Models\Notice;
 
 class NoticeController extends Controller
 {
-
     public function index()
     {
         $notices = Notice::all();
@@ -52,8 +51,7 @@ class NoticeController extends Controller
 
     public function update($id, Request $request, Notice $notice)
     {
-
-        $user = auth()->user();
+        $user   = auth()->user();
         $upload = $notice->image  = $request->file('image');
 
         $notice->updateNotice($id, $request->all(), $user, $upload);
@@ -61,14 +59,12 @@ class NoticeController extends Controller
         return response()->json(['message' => 'Udało się zaktualizować ogłoszenie']);
     }
 
-    public function freshStatus ($id, Notice $notice)
+    public function freshStatus($id, Notice $notice)
     {
-
         $user = auth()->user();
 
         $notice->freshNoticeStatus($id, $user);
 
         return response()->json(['message' => 'Status ogłoszenia został zmieniony']);
-
     }
 }

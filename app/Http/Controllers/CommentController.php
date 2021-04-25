@@ -7,7 +7,6 @@ use App\Models\Comment;
 
 class CommentController extends Controller
 {
-
     public function store(CommentRequest $request, Comment $comment, $id)
     {
         $user   = auth()->user();
