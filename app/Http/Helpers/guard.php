@@ -7,7 +7,7 @@ function guard()
     return Auth::guard('api');
 }
 
-function checkAuthor ($user, $notice)
+function checkAuthor($user, $notice)
 {
     if($user !== $notice)
     {
@@ -22,8 +22,5 @@ function checkAdmin($user)
         abort(401, 'Nie posiadasz uprawnień administratora');
     }
 }
-
-
-
 
 ?>

@@ -11,15 +11,9 @@ class MailController extends Controller
     {
         $user = auth()->user();
 
-        $title    = $request->title;
-        $content  = $request->content;
-        $receiver = $request->receiver;
-
         $mail = new MailService();
 
-        checkAdmin($user);
-
-        $mail->send($title, $content, $receiver);
+        $mail->send($request, $user);
 
         return response()->json(['message'=> 'Udało się wysłać maila']);
     }
