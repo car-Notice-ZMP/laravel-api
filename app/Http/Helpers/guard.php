@@ -15,6 +15,14 @@ function checkAuthor ($user, $notice)
     }
 }
 
+function checkAdmin($user)
+{
+    if($user->admin === 0)
+    {
+        abort(401, 'Nie posiadasz uprawnień administratora');
+    }
+}
+
 
 
 
