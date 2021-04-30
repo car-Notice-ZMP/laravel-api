@@ -17,7 +17,6 @@ class MailService
         $content  = $request->content;
         $receiver = $request->receiver;
 
-
         $this->receiver = $receiver;
 
         $data = [
@@ -25,7 +24,7 @@ class MailService
             'content' => $content
         ];
 
-        Mail::send('emails.email', $data, function($message)
+        Mail::send('email', $data, function($message)
         {
             $message->to($this->receiver, 'NoticeMyCar')->subject('NoticeMyCar');
         });

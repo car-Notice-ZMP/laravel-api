@@ -10,6 +10,7 @@ use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavouriteController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,8 +26,6 @@ use App\Http\Controllers\SearchController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-
 
 Route::group(['prefix' => 'auth', 'middleware' => 'api'], function () {
     Route::post('register',           [ RegisterController::class, 'register']);
@@ -54,7 +53,9 @@ Route::middleware([ 'jwt.auth'])->group(function () {
 
 });
 
+Route::post('mail/send',              [ MailController::class, 'send']);
 Route::get('notices/all',             [ NoticeController::class, 'index']);
 Route::get('notices/show/{id}',       [ NoticeController::class, 'show']);
 Route::post('notices/search',         [ SearchController::class, 'search']);
 Route::post('notices/search/between', [ SearchController::class, 'searchBetween']);
+
