@@ -25,7 +25,7 @@ class SendEmailRequest extends FormRequest
     {
         return [
             'title'    => 'required|string|between:5,20',
-            'content'  => 'required|string|between:5,70',
+            'content'  => 'required|string|between:5,1000',
             'receiver' => 'required|string|email',
         ];
     }
