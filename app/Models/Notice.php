@@ -89,16 +89,14 @@ class Notice extends Model implements Searchable
 
     }
 
-    public function destroyNotice($id, User $user)
+    public function destroyNotice($id)
     {
         $notice = Notice::findOrFail($id);
-
-        checkAuthor($notice->user_id, $user->id);
 
         $notice->delete();
     }
 
-    public function updateNotice($id, array $data, User $user, $upload)
+    public function updateNotice($id, array $data, $upload)
     {
         $notice = Notice::findOrFail($id);
         $image  = new UploadService;
@@ -107,7 +105,7 @@ class Notice extends Model implements Searchable
         {
             $image->setImage($upload);
 
-            checkAuthor($notice->user_id, $user->id);
+            //checkAuthor($notice->user_id, $user->id);
 
             Storage::disk('notices')->delete($notice->image_name);
 
@@ -121,11 +119,9 @@ class Notice extends Model implements Searchable
         }
     }
 
-    public function freshNoticeStatus ($id, User $user)
+    public function freshNoticeStatus ($id)
     {
         $notice = Notice::findOrFail($id);
-
-        checkAuthor($notice->user_id, $user->id);
 
         $notice->deleteStatus('nieaktywne');
 

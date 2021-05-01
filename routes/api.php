@@ -39,10 +39,15 @@ Route::get('google/callback',         [ GoogleController::class, 'handleGoogleCa
 Route::middleware([ 'jwt.auth'])->group(function () {
 
     Route::post('notices/store',          [ NoticeController::class, 'store']);
-    Route::delete('notices/delete/{id}',  [ NoticeController::class, 'destroy']);
-    Route::post('notices/update/{id}',    [ NoticeController::class, 'update']);
     Route::get('notices/my_notices',      [ NoticeController::class, 'showMyNotices']);
-    Route::post('notices/status/{id}',    [ NoticeController::class, 'freshStatus']);
+
+    Route::middleware(['CheckAuthor'])->group(function (){
+
+        Route::delete('notices/delete/{id}',  [ NoticeController::class, 'destroy']);
+        Route::post('notices/update/{id}',    [ NoticeController::class, 'update']);
+        Route::post('notices/status/{id}',    [ NoticeController::class, 'freshStatus']);
+
+    });
 
     Route::post('comments/{id}/store',    [ CommentController::class, 'store']);
 
@@ -53,7 +58,7 @@ Route::middleware([ 'jwt.auth'])->group(function () {
 
 });
 
-Route::post('mail/send',              [ MailController::class, 'send']);
+Route::post('mail/send',              [ MailController::class, 'send'])->middleware('CheckAdmin');
 Route::get('notices/all',             [ NoticeController::class, 'index']);
 Route::get('notices/show/{id}',       [ NoticeController::class, 'show']);
 Route::post('notices/search',         [ SearchController::class, 'search']);

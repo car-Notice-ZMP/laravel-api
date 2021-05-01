@@ -42,28 +42,23 @@ class NoticeController extends Controller
 
     public function destroy($id, Notice $notice)
     {
-        $user = auth()->user();
-
-        $notice->destroyNotice($id, $user);
+        $notice->destroyNotice($id);
 
         return response()->json(['message' => 'Udało się usunąć ogłoszenie']);
     }
 
     public function update($id, Request $request, Notice $notice)
     {
-        $user   = auth()->user();
         $upload = $notice->image  = $request->file('image');
 
-        $notice->updateNotice($id, $request->all(), $user, $upload);
+        $notice->updateNotice($id, $request->all(),$upload);
 
         return response()->json(['message' => 'Udało się zaktualizować ogłoszenie']);
     }
 
     public function freshStatus($id, Notice $notice)
     {
-        $user = auth()->user();
-
-        $notice->freshNoticeStatus($id, $user);
+        $notice->freshNoticeStatus($id);
 
         return response()->json(['message' => 'Status ogłoszenia został zmieniony']);
     }
