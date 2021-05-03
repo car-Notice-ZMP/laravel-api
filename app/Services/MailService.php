@@ -9,10 +9,8 @@ class MailService
 {
     private $receiver;
 
-    public function send(SendEmailRequest $request, $user)
+    public function send(SendEmailRequest $request)
     {
-        checkAdmin($user);
-
         $title    = $request->title;
         $content  = $request->content;
         $receiver = $request->receiver;
