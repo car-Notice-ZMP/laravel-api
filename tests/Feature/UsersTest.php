@@ -14,7 +14,7 @@ class UsersTest extends TestCase
     /** @test */
     public function user_sign_up_test()
     {
-        $user = User::factory()->make();
+        $user = User::factory()->create();
 
         $this->post('api/auth/register');
 

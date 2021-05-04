@@ -105,8 +105,6 @@ class Notice extends Model implements Searchable
         {
             $image->setImage($upload);
 
-            //checkAuthor($notice->user_id, $user->id);
-
             Storage::disk('notices')->delete($notice->image_name);
 
             $notice->image_url     = $image->getImageUrl();
