@@ -12,7 +12,7 @@ class NoticeController extends Controller
     {
         $notices = Notice::with('statuses')->get();
 
-        return response()->json(['All notices' => $notices], 200, [],JSON_UNESCAPED_SLASHES);
+        return response()->json(['All_notices' => $notices], 200, [],JSON_UNESCAPED_SLASHES);
     }
 
     public function show($id, Notice $notice)
