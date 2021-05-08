@@ -21,9 +21,9 @@ class Comment extends Model
         'user_id'
     ];
 
-    public function posts()
+    public function notices()
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Notice::class);
     }
 
     public function storeComment(User $user, array $data, $id)
